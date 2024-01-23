@@ -3,6 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+st.title('Visualizaciones')
+st.markdown('***')
+
 if st.checkbox('Visual de Recomendaciones'):
     st.write('Restaurantes Mexicanos en USA')
 
