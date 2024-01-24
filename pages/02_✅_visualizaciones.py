@@ -9,27 +9,21 @@ st.markdown('***')
 if st.checkbox('Visual de Recomendaciones'):
     st.write('Restaurantes Mexicanos en USA')
 
-df = pd.read_csv('dataset_trabajo.csv')
+df = pd.read_csv('archivo_trabajo.csv')
 
 dim = st.radio('Dataset muestra:', ('Filas','Columnas'),horizontal=True)
-Col = {"state":"Nombre_Estado","Name":"Nombre_Restaurante","Stars":"Numero_Estrellas","Valoracion":"Valoracion_Usuario"}
+col={"Name":"Restaurante_Mexicano","state":"Estado",'City':'Ciudad','Address':'Direccion',"Stars":"Estrellas","Valoracion":"Valoracion_Usuario"}
 
 if dim == 'Filas':
     st.write('Registros:',df.shape[0])
 else:
-    st.write('Columnas involucradas:',Col)
+    st.write('Columnas involucradas:',col)
 
-df1 = df[df['Stars']==5][['Name']]
-RM = df1[df1["Name"].isin(["Corazon Cocina","Nada","Pueblo Lindo","Loco Mexican Restaurant & Cantina",
-"Taqueria Don Quezadillas Belinda"])]
+df1 = df[['Name','state','City','Address','Stars','Valoracion']]
+RM = df1[df1["Name"].isin(["Tio Flores","Jimmy Hula's","Taco Bell","Chuy's","GUAC Tequila & Tacos"])]
 
-if st.button('Primera Recomendacion'):
+if st.button('Top 5 Restaurantes Mexicanos de USA Estandar'):
     st.write(df1[:5])
-else:
-    st.write('Top 5 Restaurantes Mexicanos Mejor Calificados')
-
-if st.button('Restaurantes 5 Estrellas'):
-    st.write('Registros:',df1.shape[0])
 
 fig = plt.figure(figsize=(4,2))
 sns.countplot(y='Name',color='#0CF926',data=RM)
@@ -37,34 +31,45 @@ plt.ylabel('Restaurantes')
 plt.xlabel('Cantidad')
 st.pyplot(fig)
 
-df2 = df[df['Stars']==5][['Name','state']]
-
-state = df[df['state'].isin(["California","Indiana","Idaho","Indiana","Indiana"])]
-
-if st.button('Segunda Recomendacion'):
-        st.write(df2[:5])
-else:
-    st.write('Top 5 Restaurantes Mexicanos Mejor Calificados por Estado')
-
-if st.button('Restaurantes 5 Estrellas por Estado'):
-    st.write('Registros:',df2.shape[0])
+if st.button('Estrellas en Restaurantes Mexicanos de USA'):
+    st.write('Registros',df1.shape[0])
 
 fig = plt.figure(figsize=(4,2))
-sns.countplot(y='state',color='#0CF926',data=state)
-plt.ylabel('Estados de USA')
+sns.countplot(y='Stars',color='#0CF926',data=df1)
+plt.ylabel('Estrellas')
 plt.xlabel('Cantidad')
 st.pyplot(fig)
 
-df3 = df[df['Stars']==1][['Name','state']]
+if st.button('Valoracion de Restaurantes Mexicanos de USA'):
+    st.write('Registros',df1.shape[0])
 
-RM_1 = df[df['Name'].isin(["Taco Bell","Que Pasa Mexican Cantina","Buena Onda","Moe's Southwest Grill","Uncle Julio's"])]
+fig = plt.figure(figsize=(4,2))
+sns.countplot(y='Valoracion',color='#0CF926',data=df1)
+plt.ylabel('Valoracion')
+plt.xlabel('Cantidad')
+st.pyplot(fig)
 
-if st.button('Tercera Recomendacion'):
+df2 = df[df['Stars']==5][['Name','state','City','Address','Valoracion']]
+
+nom = df2[df2['Name'].isin(['Corazon Cocina','Nada','Pueblo Lindo','Loco Mexican Restaurant & Cantina','Taqueria Don Quezadillas Belinda'])]
+if st.button('Top 5 Restaurantes Mexicanos en USA Mejor Calificados'):
+        st.write(df2[:5])
+else:
+    st.write('Registros',df2.shape[0])
+
+fig = plt.figure(figsize=(4,2))
+sns.countplot(y='Name',color='#0CF926',data=nom)
+plt.ylabel('Restaurantes')
+plt.xlabel('Cantidad')
+st.pyplot(fig)
+
+df3 = df[df['Stars']==4][['Name','state','City','Address','Valoracion']]
+
+RM_1 = df[df['Name'].isin(["Skyline Chili","Chili's","Rocco's Tacos and Tequila Bar - Tampa","Puerto Vallarta Mexican Restaurant & Cantina","Nada"])]
+
+if st.button('Los top 5 Restaurantes Mexicanos en USA Buena Valoracion'):
         st.write(df3[:5])
 else:
-    st.write('Top 5 Restaurantes Mexicanos con Menor Calificacion por Estado')
-
-if st.button('Restaurantes Mexicanos 1 Estrella'):
     st.write('Registros:',df3.shape[0])
 
 fig = plt.figure(figsize=(4,2))
@@ -73,46 +78,18 @@ plt.ylabel('Restaurantes')
 plt.xlabel('Cantidad')
 st.pyplot(fig)
         
-state1 = df[df['state'].isin(["Missouri","Florida","Pensilvania","Nueva Jersey","Tennessee"])]
 
-if st.button('Restaurantes Mexicanos 1 Estrella por Estado'):
-    st.write('Registros:',df3.shape[0])
+df4 = df[df['Stars']==1][['Name','state','City','Address','Valoracion']]
+name = df4[df4['Name'].isin(["Taco Bell","Que Pasa Mexican Cantina","Buena Onda","Moe's Southwest Grill","Uncle Julio's"])]
 
-fig = plt.figure(figsize=(4,2))
-sns.countplot(y='state',color='#0CF926',data=state1)
-plt.ylabel('Estados de USA')
-plt.xlabel('Cantidad')
-st.pyplot(fig)
-
-df4 = df[['Name','Valoracion']]
-
-if st.button('Cuarta Recomendacion'):
+if st.button('Los top 5 Restaurantes Mexicanos en USA Peor Calificados'):
         st.write(df4[:5])
 else:
-    st.write('Top 5 Restaurantes Mexicanos Valorados por el Usuario')
-
-if st.button('Valoracion Usuario'):
     st.write('Registros:',df4.shape[0])
 
 fig = plt.figure(figsize=(4,2))
-sns.countplot(y='Valoracion',color='#0CF926',data=df4)
-plt.ylabel('Valoracion del cliente')
-plt.xlabel('Cantidad')
-st.pyplot(fig)
-
-df5 = df[df['Valoracion']=='Muy bueno'][['Name']]
-df6 = df5[df5['Name'].isin(["Jimmy Hula's","GUAC Tequila & Tacos","Corazon Cocina","Zeppelin","Nada"])]
-
-if st.button('Quinta Recomendacion'):
-        st.write(df5[:5])
-else:
-    st.write('Top 5 Restaurantes Mexicanos Muy Buenos en USA')
-
-if st.button('Muy Buenos Restaurantes Mexicanos'):
-    st.write('Registros:',df6.shape[0])
-
-fig = plt.figure(figsize=(4,2))
-sns.countplot(y='Name',color='#0CF926',data=df6)
+sns.countplot(y='Name',color='#0CF926',data=name)
 plt.ylabel('Restaurantes')
 plt.xlabel('Cantidad')
 st.pyplot(fig)
+
