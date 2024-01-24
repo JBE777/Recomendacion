@@ -20,7 +20,7 @@ else:
 df1 = df[['Name','state','City','Address','Stars','Valoracion']]
 
 if st.button('Primera Recomendacion'):
-    st.write('Los top 5 Restaurantes Mexicanos en USA')
+    st.write('Los top 5 Restaurantes Mexicanos en USA Estandar')
 
 est = st.radio('Restaurantes Mexicanos:', ('Estandar','Porcentaje'),horizontal=True)
 if est == 'Estandar':
@@ -28,15 +28,15 @@ if est == 'Estandar':
 else:
     st.write('Total datos',(df1.shape[0]/df.shape[0])*100, '%')
 
-if st.button('Top 1 Restaurantes Mexicanos en USA'):
+if st.button('Top 1 Estandar'):
     st.write(df1.head(1))   
-if st.button('Top 2 Restaurantes Mexicanos en USA'):
+if st.button('Top 2 Estandar'):
     st.write(df1.head(2))
-if st.button('Top 3 Restaurantes Mexicanos en USA'):
+if st.button('Top 3 Estandar'):
     st.write(df1.head(3))
-if st.button('Top 4 Restaurantes Mexicanos en USA'):
+if st.button('Top 4 Estandar'):
     st.write(df1.head(4))
-if st.button('Top 5 Restaurantes Mexicanos en USA'):
+if st.button('Top 5 Estandar'):
     st.write(df1.head(5))
 
 df2 = df[df['Stars']==5][['Name','state','City','Address','Valoracion']]
@@ -88,8 +88,8 @@ df4 = df[df['Stars']==1][['Name','state','City','Address','Valoracion']]
 if st.button('Cuarta Recomendacion'):
     st.write('Los top 5 Restaurantes Mexicanos en USA Peor Calificados')
 
-est = st.radio('Restaurantes Mexicanos:', ('Peor calificados','Porcentaje'),horizontal=True)
-if est == 'Peor calificados':
+est = st.radio('Restaurantes Mexicanos:', ('1 Estrella','Porcentaje'),horizontal=True)
+if est == '1 Estrella':
     st.write('Registros:',df4.shape[0])
 else:
     st.write('Peor calificados',round((df4.shape[0]/df.shape[0])*100,2), '%')
