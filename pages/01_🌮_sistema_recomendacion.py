@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.title("Sistema de Recomendacion")
-st.markdown('***')
+st.subheader("Sistema de recomendaciones")
 
 if st.button('Recomendaciones con el tema:'):
     st.write('Restaurantes Mexicanos en USA')
