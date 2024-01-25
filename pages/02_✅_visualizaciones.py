@@ -27,17 +27,17 @@ plt.ylabel('Estrellas',fontsize=5)
 plt.xlabel('Cantidad de estrellas',fontsize=5)
 st.pyplot(fig)
 
-if st.button('Valoracion de Restaurantes Mexicanos de USA'):
+if st.button('Valoración de Restaurantes Mexicanos de USA'):
     st.write('Registros',df.shape[0])
 
 fig = plt.figure(figsize=(4,2))
 sns.countplot(y='Valoracion',color='#75FA61',data=df)
-plt.ylabel('Valoracion del usuario',fontsize=6)
+plt.ylabel('Valoración del usuario',fontsize=6)
 plt.xlabel('Cantidad de valoraciones',fontsize=6)
 st.pyplot(fig)
 
-df['Cantidad_USA'] = df['state']
-df1 = df[df['Stars']==5][['Name','Cantidad_USA']].groupby(['Name']).count().sort_values(by='Cantidad_USA',ascending=False)
+df['Cantidad_Restaurantes'] = df['state']
+df1 = df[df['Stars']==5][['Name','Cantidad_Restaurantes']].groupby(['Name']).count().sort_values(by='Cantidad_Restaurantes',ascending=False)
 df1.reset_index(inplace=True)
 RM = df[df['Name'].isin(['Los Agaves','Bartaco','Tumerico','Bakersfield','South Philly Barbacoa'])]
 
@@ -47,12 +47,13 @@ if st.button('Los top 5 Mejores Restaurantes Mexicanos de USA'):
 fig = plt.figure(figsize=(4,2))
 sns.countplot(y='Name',color='#75FA61',data=RM)
 plt.ylabel('Restaurantes',fontsize=6)
-plt.xlabel('Cantidad en USA',fontsize=6)
+plt.xlabel('Cantidad de restaurantes',fontsize=6)
 st.pyplot(fig)
 
-df2 = df[df['Stars']==5][['Name','state','Cantidad_USA']].groupby(['Name','state']).count().sort_values(by='Cantidad_USA',ascending=False)
+df2 = df[df['Stars']==5][['Name','state','Cantidad_Restaurantes']].groupby(['Name','state']).count().sort_values(by='Cantidad_Restaurantes',ascending=False)
 df2.reset_index(inplace=True)
 nom = df[df['Name'].isin(["Los Agaves","Tumerico","South Philly Barbacoa","Zeppelin","Capital Tacos"])]
+
 if st.button('Los top 5 Mejores Restaurantes Mexicanos en USA por estado'):
     st.write('Registros por estado',df2.shape[0])
 
@@ -61,32 +62,20 @@ if st.button('Los top 5 Mejores Restaurantes Mexicanos en USA por estado'):
 fig = plt.figure(figsize=(4,2))
 sns.countplot(y='Name',color='#75FA61',data=nom)
 plt.ylabel('Restaurantes',fontsize=6)
-plt.xlabel('Cantidad en USA',fontsize=6)
+plt.xlabel('Cantidad de restaurantes',fontsize=6)
 st.pyplot(fig)
 
-df3 = df[df['Stars']==4][['Name','state','Cantidad_USA']].groupby(['Name','state']).count().sort_values(by='Cantidad_USA',ascending=False)
+df3 = df[df['Stars']==1][['Name','state','Cantidad_Restaurantes']].groupby(['Name','state']).count().sort_values(by='Cantidad_Restaurantes',ascending=False)
 df3.reset_index(inplace=True)
-RM_1 = df3[df3['Name'].isin(["Zeppelin","El Vez","Bartaco","Chuy's","El Charro Cafe"])]
-if st.button('Los top 5 Restaurantes Mexicanos en USA Buena Valoracion'):
-        st.write('Registros por estado',df3.shape[0])
-
-fig = plt.figure(figsize=(4,2))
-sns.countplot(y='Name',color='#75FA61',data=RM_1)
-plt.ylabel('Restaurantes',fontsize=6)
-plt.xlabel('Cantidad_USA',fontsize=6)
-st.pyplot(fig)
-        
-df4 = df[df['Stars']==1][['Name','state','Cantidad_USA']].groupby(['Name','state']).count().sort_values(by='Cantidad_USA',ascending=False)
-df4.reset_index(inplace=True)
-name = df4[df4['Name'].isin(["Chili's","Taco Bell","Taco Bell","Taco Bell","Chipotle Mexican Grill"])]
+name = df3[df3['Name'].isin(["Chili's","Taco Bell","Taco Bell","Taco Bell","Chipotle Mexican Grill"])]
 
 if st.button('Los top 5 Restaurantes Mexicanos en USA Peor Calificados'):
-        st.write('Registros por estado',df4.shape[0])
+        st.write('Registros por estado',df3.shape[0])
 
 fig = plt.figure(figsize=(4,2))
 sns.countplot(y='Name',color='#75FA61',data=name)
 plt.ylabel('Restaurantes',fontsize=6)
-plt.xlabel('Cantidad_USA',fontsize=6)
+plt.xlabel('Cantidad de restaurantes',fontsize=6)
 st.pyplot(fig)
 
 
