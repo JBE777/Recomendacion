@@ -1,20 +1,21 @@
 import streamlit as st
+import time
 
-st.title("Introduccion")
-st.markdown("#### Con el proposito de generar mas diversidad de resultados en las consultas. Se construyeron los siguientes sistemas de recomendacion:")
+col1,col2,col3 = st.columns([1,2,1])
 
-st.markdown("#### 1. Los top 5 Restaurantes Mexicanos en USA Estandar")
-st.markdown("Lista generada sin filtros")
-st.markdown("#### 2. Los top 5 Restaurantes Mexicanos en USA Mejor Calificados")
-st.markdown("Lista generada filtrando por 5 estrellas")
-st.markdown("#### 3. Los top 5 Restaurantes Mexicanos en USA Buena Valoracion")
-st.markdown("Lista generada filtrando por 4 estrellas")
-st.markdown("#### 4. Los top 5 Restaurantes Mexicanos en USA Peor Calificados")
-st.markdown("Lista generada filtrando por 1 estrella")
-st.markdown("***")
+col1.markdown(" ## Welcome to my app! ")
+col2.markdown(" ### Recomendaciones")
 
-st.sidebar.markdown("Part-Time 04 Data Science ")
-st.sidebar.markdown("Grupo 1: Marta-Hernan-Carlos-Steven-Javier")
+uploaded_photo = col2.file_uploader("Upload a photo")
+camera_photo = col2.camera_input("Take a photo")
+
+progress_bar = col2.progress(0)
+
+for perc_completed in range(100):
+    time.sleep(0.5)
+    progress_bar.progress(perc_completed+1)
+
+col2.success("Photo uploaded successfully")
 
 
 
